@@ -1,18 +1,18 @@
-# Base image for MinIO
-FROM minio/minio as minio
+# Use MinIO as the base image
+FROM minio/minio
 
-# Base image for Nginx
-FROM nginx:latest as nginx
+# Install Nginx
+RUN apt-get update && apt-get install -y nginx && apt-get clean
 
 # Copy Nginx configuration
 COPY nginx.conf /etc/nginx/nginx.conf
 
-# Copy the entrypoint script
+# Copy entrypoint script
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-# Expose port 80 for Nginx
+# Expose ports
 EXPOSE 80
 
-# Start Nginx and MinIO
+# Start both Nginx and MinIO
 CMD ["/entrypoint.sh"]
