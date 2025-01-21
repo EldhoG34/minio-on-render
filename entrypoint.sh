@@ -4,4 +4,4 @@
 nginx
 
 # Start MinIO server
-exec minio server /data --console-address ":9001"
+exec /usr/bin/minio server /data --console-address ":9001"
